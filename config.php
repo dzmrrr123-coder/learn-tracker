@@ -1,7 +1,26 @@
 <?php
 // Learn Tracker Configuration & Core Helpers
 
-// Set session save path on serverless environment (Vercel)
+// 1. Native .env loader if .env file exists
+if (file_exists(__DIR__ . '/.env')) {
+    $env_lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($env_lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) continue;
+        if (strpos($line, '=') !== false) {
+            list($env_key, $env_val) = explode('=', $line, 2);
+            $env_key = trim($env_key);
+            $env_val = trim($env_val, " \t\n\r\0\x0B\"'");
+            if (!getenv($env_key)) {
+                putenv("$env_key=$env_val");
+                $_ENV[$env_key] = $env_val;
+                $_SERVER[$env_key] = $env_val;
+            }
+        }
+    }
+}
+
+// 2. Set session save path on serverless environment (Vercel)
 if (getenv('VERCEL') && !is_dir('/tmp/sessions')) {
     @mkdir('/tmp/sessions', 0777, true);
     ini_set('session.save_path', '/tmp/sessions');
@@ -11,12 +30,30 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database configuration (supports local and cloud environment variables)
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
-define('DB_NAME', getenv('DB_NAME') ?: 'learn-tracker');
-define('DB_PORT', (int)(getenv('DB_PORT') ?: 3306));
+// 3. Support Railway MYSQL_URL if provided
+if (getenv('MYSQL_URL') && !getenv('DB_HOST') && !getenv('MYSQLHOST')) {
+    $parsed_url = parse_url(getenv('MYSQL_URL'));
+    if ($parsed_url) {
+        if (isset($parsed_url['host'])) putenv("DB_HOST=" . $parsed_url['host']);
+        if (isset($parsed_url['port'])) putenv("DB_PORT=" . $parsed_url['port']);
+        if (isset($parsed_url['user'])) putenv("DB_USER=" . $parsed_url['user']);
+        if (isset($parsed_url['pass'])) putenv("DB_PASS=" . $parsed_url['pass']);
+        if (isset($parsed_url['path'])) putenv("DB_NAME=" . ltrim($parsed_url['path'], '/'));
+    }
+}
+
+// 4. Resolve Database configuration (Supports standard and Railway native variables)
+$resolved_host = getenv('DB_HOST') ?: (getenv('MYSQLHOST') ?: 'localhost');
+$resolved_port = (int)(getenv('DB_PORT') ?: (getenv('MYSQLPORT') ?: 3306));
+$resolved_user = getenv('DB_USER') ?: (getenv('MYSQLUSER') ?: 'root');
+$resolved_pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : (getenv('MYSQLPASSWORD') !== false ? getenv('MYSQLPASSWORD') : (getenv('MYSQL_ROOT_PASSWORD') !== false ? getenv('MYSQL_ROOT_PASSWORD') : ''));
+$resolved_name = getenv('DB_NAME') ?: (getenv('MYSQLDATABASE') ?: (getenv('MYSQL_DATABASE') ?: 'learn-tracker'));
+
+define('DB_HOST', $resolved_host);
+define('DB_PORT', $resolved_port);
+define('DB_USER', $resolved_user);
+define('DB_PASS', $resolved_pass);
+define('DB_NAME', $resolved_name);
 
 // Connect database
 function db_connect() {

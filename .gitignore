@@ -8,3 +8,4 @@ Thumbs.db
 *.log
 cookies.txt
 scratch/
+.env
