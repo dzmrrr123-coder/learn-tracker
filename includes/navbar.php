@@ -54,6 +54,11 @@ if (is_logged_in()) {
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="lt-nav-link <?= $current_script === 'questions.php' ? 'active' : '' ?>" href="questions.php">
+                            <i class="fas fa-circle-question"></i> Questions
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="lt-nav-link <?= $current_script === 'errors.php' ? 'active' : '' ?>" href="errors.php">
                             <i class="fas fa-note-sticky"></i> Notes
                         </a>

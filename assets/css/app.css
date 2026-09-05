@@ -858,4 +858,20 @@ footer { background: var(--bg-surface); border-color: var(--border-subtle); colo
 .dropdown-menu-dark .dropdown-item:hover, .dropdown-menu-dark .dropdown-item.active { background: var(--bg-surface-hover); color: var(--text-primary); }
 
 :focus-visible { outline: 3px solid rgba(82, 121, 111, 0.3); outline-offset: 2px; }
+.questions-hero { background: var(--bg-surface); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-md); }
+.question-summary { display: flex; flex-direction: column; justify-content: center; min-width: 150px; padding: 14px 18px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: #fbfcfa; }
+.question-summary strong { color: var(--text-primary); font-size: 1.5rem; line-height: 1.1; }
+.question-summary span { color: var(--text-muted); font-size: 0.78rem; margin-top: 4px; }
+.question-card { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.question-card:hover { border-color: var(--border-highlight); box-shadow: var(--shadow-md); }
+.question-status, .question-priority { display: inline-flex; align-items: center; border-radius: 999px; font-size: 0.72rem; font-weight: 700; padding: 4px 8px; }
+.status-open { background: #f5f1e8; color: #896629; }
+.status-in_review { background: #edf3ef; color: var(--primary); }
+.status-answered { background: #edf5ed; color: #547b5a; }
+.status-archived { background: #f0f1ef; color: var(--text-muted); }
+.priority-low { color: var(--text-secondary); background: #f1f3ef; }
+.priority-medium { color: #896629; background: #f5f1e8; }
+.priority-high { color: #9b5048; background: #f8ecea; }
+.question-answer { padding: 12px 14px; border-left: 3px solid var(--accent-emerald); background: #f4f8f4; color: var(--text-secondary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.empty-state-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 auto; border-radius: 12px; background: #edf3ef; color: var(--primary); font-size: 1.1rem; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
