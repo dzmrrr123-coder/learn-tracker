@@ -105,10 +105,10 @@ if (is_logged_in()) {
                                 <div class="badge bg-primary text-white mt-1"><?= $hud_rank ?></div>
                             </li>
                             <li>
-                                <a class="dropdown-item rounded py-2 small" href="index.php"><i class="fas fa-user-astronaut me-2 text-primary"></i>Statistik Saya</a>
+                                <a class="dropdown-item rounded py-2 small" href="index.php"><i class="fas fa-chart-simple me-2 text-primary"></i>Overview saya</a>
                             </li>
                             <li>
-                                <a class="dropdown-item rounded py-2 small" href="quests.php"><i class="fas fa-tasks me-2 text-emerald"></i>Progress Quest</a>
+                                <a class="dropdown-item rounded py-2 small" href="quests.php"><i class="fas fa-map me-2 text-emerald"></i>Roadmap saya</a>
                             </li>
                             <li><hr class="dropdown-divider border-secondary"></li>
                             <li>

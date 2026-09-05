@@ -42,7 +42,7 @@ require_once 'includes/navbar.php';
 
 <main class="container py-4" role="main">
     <!-- Header Banner -->
-    <div class="card p-4 mb-4" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);">
+    <div class="resources-hero card p-4 mb-4">
         <div class="row align-items-center g-4">
             <div class="col-lg-7">
                 <div class="d-flex align-items-center gap-2 mb-2">
@@ -53,7 +53,7 @@ require_once 'includes/navbar.php';
                         Roadmap 12 Minggu
                     </span>
                 </div>
-                <h1 class="h3 fw-bold mb-2">Sumber Belajar <span class="text-gradient">DevOps & Backend</span></h1>
+                <h1 class="h3 fw-bold mb-2">Resources <span class="text-gradient">DevOps & Backend</span></h1>
                 <p class="text-secondary small mb-0">
                     Referensi resmi, tutorial video terbaik, dan latihan interaktif yang dirancang khusus untuk memandu kamu menyelesaikan setiap quest mingguan tanpa tersesat.
                 </p>
