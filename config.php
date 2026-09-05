@@ -1,19 +1,26 @@
 <?php
 // Learn Tracker Configuration & Core Helpers
 
+// Set session save path on serverless environment (Vercel)
+if (getenv('VERCEL') && !is_dir('/tmp/sessions')) {
+    @mkdir('/tmp/sessions', 0777, true);
+    ini_set('session.save_path', '/tmp/sessions');
+}
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Database configuration
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'learn-tracker');
+// Database configuration (supports local and cloud environment variables)
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
+define('DB_NAME', getenv('DB_NAME') ?: 'learn-tracker');
+define('DB_PORT', (int)(getenv('DB_PORT') ?: 3306));
 
 // Connect database
 function db_connect() {
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
     if ($conn->connect_error) {
         die("Database connection failed: " . htmlspecialchars($conn->connect_error));
     }
