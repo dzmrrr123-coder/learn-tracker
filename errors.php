@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['add_error']) || (iss
 
             update_user_streak($conn, $user_id);
 
-            set_flash('success', "🎉 Error berhasil dicatat! Kamu mendapatkan +5 XP!");
+            set_flash('success', "Catatan berhasil disimpan. Kamu mendapatkan +5 XP.");
         } else {
             set_flash('danger', "Gagal menyimpan error ke database.");
         }
@@ -103,20 +103,20 @@ require_once 'includes/navbar.php';
 
 <main class="container py-4" role="main">
     <!-- Header Banner -->
-    <div class="card p-4 mb-4" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);">
+    <div class="notes-hero card p-4 mb-4">
         <div class="row align-items-center g-4">
             <div class="col-lg-7">
                 <div class="d-flex align-items-center gap-2 mb-2">
                     <span class="badge" style="background: rgba(244, 63, 94, 0.2); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.4);">
-                        <i class="fas fa-bug me-1"></i> Knowledge Base & Troubleshooting
+                        <i class="fas fa-note-sticky me-1"></i> Notes & Errors
                     </span>
                     <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">
-                        +5 XP Per Error Dicatat
+                        Dokumentasi pembelajaran
                     </span>
                 </div>
-                <h1 class="h3 fw-bold mb-2">Jurnal Error & Solusi <span class="text-gradient">DevOps</span></h1>
+                <h1 class="h3 fw-bold mb-2">Notes & solusi belajar</h1>
                 <p class="text-secondary small mb-0">
-                    Setiap error yang kamu hadapi dan pecahkan adalah batu loncatan berharga. Catat sintaks error, solusinya, serta link dokumentasi untuk referensi masa depan.
+                    Simpan error, insight, dan solusi agar pengalaman belajar bisa kamu gunakan kembali saat dibutuhkan.
                 </p>
             </div>
 
@@ -150,9 +150,9 @@ require_once 'includes/navbar.php';
         <div class="col-lg-4">
             <div class="card p-4 sticky-top" style="top: 80px;">
                 <h2 class="h5 fw-bold mb-1 d-flex align-items-center gap-2">
-                    <i class="fas fa-plus-circle text-primary"></i> Catat Error Baru
+                    <i class="fas fa-plus-circle text-primary"></i> Tambah catatan
                 </h2>
-                <p class="text-secondary small mb-3">Dapatkan reward <strong>+5 XP</strong> setiap kali kamu mendokumentasikan kendala teknis.</p>
+                <p class="text-secondary small mb-3">Dokumentasikan kendala teknis dan solusi yang berhasil kamu temukan.</p>
 
                 <form method="POST" action="errors.php">
                     <?= csrf_field() ?>
@@ -188,7 +188,7 @@ require_once 'includes/navbar.php';
                     </div>
 
                     <button type="submit" name="add_error" class="btn btn-cyber w-100 py-2">
-                        <i class="fas fa-save me-2"></i> Simpan Catatan & Klaim XP
+                        <i class="fas fa-save me-2"></i> Simpan catatan
                     </button>
                 </form>
             </div>

@@ -50,7 +50,7 @@ require_once 'includes/navbar.php';
     <div class="row g-4 justify-content-center">
         <!-- Main Timer Card -->
         <div class="col-lg-8">
-            <div class="timer-container">
+            <div class="timer-container focus-workspace">
                 <div class="d-flex justify-content-center gap-2 mb-4">
                     <button type="button" class="btn btn-cyber-outline btn-sm timer-mode-btn active" data-mode="focus" data-time="25">
                         <i class="fas fa-brain me-1 text-primary"></i> Fokus (25m)
@@ -68,9 +68,8 @@ require_once 'includes/navbar.php';
                     <svg class="timer-svg" viewBox="0 0 220 220">
                         <defs>
                             <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#6366f1" />
-                                <stop offset="50%" stop-color="#8b5cf6" />
-                                <stop offset="100%" stop-color="#d946ef" />
+                                <stop offset="0%" stop-color="#52796f" />
+                                <stop offset="100%" stop-color="#6f9676" />
                             </linearGradient>
                         </defs>
                         <!-- Background ring -->
@@ -102,7 +101,7 @@ require_once 'includes/navbar.php';
                 <div class="p-3 rounded mx-auto" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); max-width: 480px;">
                     <div class="d-flex align-items-center justify-content-center gap-2 text-warning small fw-semibold">
                         <i class="fas fa-gift"></i>
-                        <span>Selesaikan 1 sesi fokus (25m) untuk mendapatkan <strong>+10 XP</strong> dan pertahankan streak!</span>
+                        <span>Selesaikan satu sesi fokus 25 menit untuk menjaga momentum belajar.</span>
                     </div>
                 </div>
             </div>
@@ -113,7 +112,7 @@ require_once 'includes/navbar.php';
             <!-- Today Stats -->
             <div class="card p-4">
                 <h2 class="h6 fw-bold mb-3 d-flex align-items-center gap-2">
-                    <i class="fas fa-chart-line text-emerald"></i> Statistik Fokus Hari Ini
+                    <i class="fas fa-chart-line text-emerald"></i> Fokus hari ini
                 </h2>
                 <div class="row g-2 text-center mb-3">
                     <div class="col-6">
@@ -138,7 +137,7 @@ require_once 'includes/navbar.php';
             <!-- Recent Sessions List -->
             <div class="card p-4">
                 <h2 class="h6 fw-bold mb-3 d-flex align-items-center gap-2">
-                    <i class="fas fa-history text-primary"></i> Riwayat Sesi Terakhir
+                    <i class="fas fa-history text-primary"></i> Sesi terbaru
                 </h2>
                 <div id="recentSessionsList" class="d-flex flex-column gap-2">
                     <?php if (!empty($recent_sessions)): ?>
@@ -309,7 +308,7 @@ function sessionCompleted() {
         // Switch to Short Break automatically
         switchMode('shortBreak', 5);
     } else {
-        showToast('Waktu istirahat selesai! Waktunya kembali fokus 🚀', 'info');
+        showToast('Waktu istirahat selesai. Waktunya kembali fokus.', 'info');
         switchMode('focus', 25);
     }
 }
