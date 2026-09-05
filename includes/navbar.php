@@ -22,9 +22,8 @@ if (is_logged_in()) {
 <nav class="lt-navbar navbar navbar-expand-lg navbar-dark" aria-label="Navigasi Utama">
     <div class="container">
         <a class="navbar-brand" href="index.php">
-            <i class="fas fa-terminal text-primary fs-4"></i>
-            <span>Learn<span class="text-gradient">Tracker</span></span>
-            <span class="brand-badge">DevOps</span>
+            <span class="brand-mark" aria-hidden="true">LT</span>
+            <span>Learn Tracker</span>
         </a>
 
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Buka navigasi">
@@ -36,27 +35,27 @@ if (is_logged_in()) {
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 gap-1">
                     <li class="nav-item">
                         <a class="lt-nav-link <?= $current_script === 'index.php' ? 'active' : '' ?>" href="index.php">
-                            <i class="fas fa-compass"></i> Dashboard
+                            <i class="fas fa-grid-2"></i> Overview
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="lt-nav-link <?= $current_script === 'quests.php' ? 'active' : '' ?>" href="quests.php">
-                            <i class="fas fa-scroll"></i> Quest Board
+                            <i class="fas fa-map"></i> Roadmap
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="lt-nav-link <?= $current_script === 'resources.php' ? 'active' : '' ?>" href="resources.php">
-                            <i class="fas fa-book-open"></i> Sumber Belajar
+                            <i class="fas fa-book-open"></i> Resources
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="lt-nav-link <?= $current_script === 'timer.php' ? 'active' : '' ?>" href="timer.php">
-                            <i class="fas fa-stopwatch"></i> Pomodoro
+                            <i class="fas fa-clock"></i> Focus
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="lt-nav-link <?= $current_script === 'errors.php' ? 'active' : '' ?>" href="errors.php">
-                            <i class="fas fa-bug"></i> Error Log
+                            <i class="fas fa-note-sticky"></i> Notes
                         </a>
                     </li>
                 </ul>
