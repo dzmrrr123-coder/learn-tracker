@@ -57,3 +57,21 @@ CREATE TABLE IF NOT EXISTS pomodoro_sessions (
     completed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_pomodoro_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    quest_id INT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NULL,
+    topic VARCHAR(100) NULL,
+    status ENUM('open', 'in_review', 'answered', 'archived') NOT NULL DEFAULT 'open',
+    priority ENUM('low', 'medium', 'high') NOT NULL DEFAULT 'medium',
+    answer TEXT NULL,
+    reference_link VARCHAR(500) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    answered_at DATETIME NULL,
+    CONSTRAINT fk_questions_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_questions_quest FOREIGN KEY (quest_id) REFERENCES quests(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
