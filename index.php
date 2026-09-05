@@ -88,46 +88,43 @@ require_once 'includes/navbar.php';
 ?>
 
 <main class="container py-4" role="main">
-    <!-- Hero Banner -->
-    <div class="card p-4 p-md-5 mb-4 position-relative overflow-hidden" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%); border-left: 5px solid var(--primary);">
+    <!-- Overview header and next action -->
+    <div class="overview-hero card p-4 p-md-5 mb-4 position-relative overflow-hidden">
+        <div class="overview-kicker">Learning overview <span class="overview-dot" aria-hidden="true"></span> Minggu <?= $selected_week ?> dari 12</div>
         <div class="row align-items-center">
             <div class="col-lg-8 mb-3 mb-lg-0">
                 <div class="d-flex align-items-center gap-2 mb-2">
-                    <span class="badge" style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4);">
-                        <i class="fas fa-terminal me-1"></i> DevOps Preparation HQ
-                    </span>
-                    <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fde68a;">
-                        <span class="flame-icon">🔥</span> Streak <?= (int)$user['streak'] ?> Hari
-                    </span>
+                    <span class="overview-status"><span class="status-dot" aria-hidden="true"></span> Fokus belajar aktif</span>
+                    <span class="overview-streak">Konsisten <?= (int)$user['streak'] ?> hari</span>
                 </div>
                 <h1 class="display-6 fw-bold mb-2">
                     Selamat Belajar, <span class="text-gradient"><?= htmlspecialchars($user['username']) ?></span>!
                 </h1>
                 <p class="text-secondary mb-3 mb-md-0" style="max-width: 600px;">
-                    Kamu berada di peringkat <strong><?= htmlspecialchars($rank_title) ?></strong>. Selesaikan quest minggu ini, catat temuan error, dan latih fokusmu dengan Pomodoro.
+                    Lanjutkan dari langkah terakhir dan selesaikan satu target kecil hari ini. Progress belajar kamu tetap tersimpan rapi di satu tempat.
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end">
                 <div class="d-flex flex-wrap justify-content-lg-end gap-2">
                     <a href="timer.php" class="btn btn-cyber">
-                        <i class="fas fa-stopwatch me-1"></i> Mulai Fokus
+                        <i class="fas fa-play me-1"></i> Mulai sesi fokus
                     </a>
-                    <a href="errors.php" class="btn btn-cyber-outline">
-                        <i class="fas fa-bug me-1"></i> Catat Error (+5 XP)
+                    <a href="quests.php" class="btn btn-cyber-outline">
+                        <i class="fas fa-arrow-right me-1"></i> Lihat roadmap
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Gamification Stats Grid -->
+    <!-- Progress summary -->
     <div class="row g-3 mb-4">
         <!-- Level & Rank -->
         <div class="col-sm-6 col-xl-3">
             <div class="stat-card">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div>
-                        <div class="stat-label">Level Karakter</div>
+                        <div class="stat-label">Level belajar</div>
                         <div class="stat-val" id="statLevel"><?= $level ?></div>
                     </div>
                     <div class="stat-icon emerald">
@@ -145,7 +142,7 @@ require_once 'includes/navbar.php';
             <div class="stat-card">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div>
-                        <div class="stat-label">Total Pengalaman</div>
+                        <div class="stat-label">Total XP</div>
                         <div class="stat-val"><span id="statTotalXp"><?= (int)$user['xp'] ?></span> <span class="fs-6 text-gold">XP</span></div>
                     </div>
                     <div class="stat-icon gold">
@@ -167,7 +164,7 @@ require_once 'includes/navbar.php';
             <div class="stat-card">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div>
-                        <div class="stat-label">Daily Streak</div>
+                        <div class="stat-label">Konsistensi</div>
                         <div class="stat-val"><?= (int)$user['streak'] ?> <span class="fs-6 text-warning">Hari</span></div>
                     </div>
                     <div class="stat-icon gold">
@@ -185,7 +182,7 @@ require_once 'includes/navbar.php';
             <div class="stat-card">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div>
-                        <div class="stat-label">Roadmap PKL</div>
+                        <div class="stat-label">Roadmap aktif</div>
                         <div class="stat-val">W-<?= $selected_week ?> <span class="fs-6 text-secondary">/ 12</span></div>
                     </div>
                     <div class="stat-icon cyan">
@@ -207,9 +204,9 @@ require_once 'includes/navbar.php';
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-3 border-bottom" style="border-color: var(--border-subtle) !important;">
                     <div>
                         <h2 class="h5 fw-bold mb-0 d-flex align-items-center gap-2">
-                            <i class="fas fa-scroll text-primary"></i> Quest Minggu ke-<?= $selected_week ?>
+                            <i class="fas fa-list-check text-primary"></i> Target minggu ini
                         </h2>
-                        <small class="text-secondary">Selesaikan misi untuk mendapatkan XP dan naik level</small>
+                        <small class="text-secondary">Pilih satu target berikutnya untuk menjaga momentum belajar.</small>
                     </div>
 
                     <!-- Week selector quick dropdown -->
@@ -289,7 +286,7 @@ require_once 'includes/navbar.php';
             <div class="card p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom" style="border-color: var(--border-subtle) !important;">
                     <h2 class="h5 fw-bold mb-0 d-flex align-items-center gap-2">
-                        <i class="fas fa-book-open text-cyan"></i> Sumber Belajar M-<?= $selected_week ?>
+                        <i class="fas fa-book-open text-cyan"></i> Materi pendukung
                     </h2>
                     <a href="resources.php?week=<?= $selected_week ?>" class="small text-secondary text-decoration-none">
                         Lihat Semua <i class="fas fa-chevron-right ms-1"></i>
@@ -332,7 +329,7 @@ require_once 'includes/navbar.php';
             <div class="card p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom" style="border-color: var(--border-subtle) !important;">
                     <h2 class="h5 fw-bold mb-0 d-flex align-items-center gap-2">
-                        <i class="fas fa-bug text-rose"></i> Catatan Error Terakhir
+                        <i class="fas fa-note-sticky text-rose"></i> Catatan terbaru
                     </h2>
                     <a href="errors.php" class="small text-secondary text-decoration-none">
                         Lihat Semua <i class="fas fa-chevron-right ms-1"></i>
